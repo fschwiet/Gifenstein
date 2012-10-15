@@ -56,6 +56,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuildDronePandemic.cs" />
+    <Compile Include="Hmm\DronePandemic.cs" />
+    <Compile Include="Hmm\FramePosition.cs" />
+    <Compile Include="Hmm\IAnimation.cs" />
     <Compile Include="ImageExtensions.cs" />
     <Compile Include="ImageInfo.cs" />
     <Compile Include="NoopExtension.cs" />
