@@ -63,6 +63,10 @@
     <Compile Include="AppendGifs.cs" />
     <Compile Include="ImageResizerExtensions\NoopExtension.cs" />
     <Compile Include="ImageResizerExtensions\AnimationVisitorExtension.cs" />
+    <Compile Include="BuildDronePandemic.cs" />
+    <Compile Include="Hmm\DronePandemic.cs" />
+    <Compile Include="Hmm\FramePosition.cs" />
+    <Compile Include="Hmm\IAnimation.cs" />
     <Compile Include="ImageExtensions.cs" />
     <Compile Include="ImageInfo.cs" />
     <Compile Include="ImageResizerUtil.cs" />
