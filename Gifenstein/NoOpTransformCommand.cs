@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Gifenstein.ImageResizerExtensions;
 using ImageResizer;
+using ImageResizer.Plugins;
 using ImageResizer.Plugins.AnimatedGifs;
 using ImageResizer.Plugins.PrettyGifs;
 using ManyConsole;
@@ -19,17 +21,11 @@ namespace Gifenstein
         
         public override int Run(string[] remainingArguments)
         {
-            var builderConfig = new ImageResizer.Configuration.Config();
-
-            new PrettyGifs().Install(builderConfig);
-            new AnimatedGifs().Install(builderConfig);
-            builderConfig.Plugins.add_plugin(new NoopExtension());
-
-            var imageBuilder = new ImageBuilder(builderConfig.Plugins.ImageBuilderExtensions, builderConfig.Plugins, builderConfig.Pipeline, builderConfig.Pipeline);
-
-            var resizeSettings = new ResizeSettings() { };
-
-            imageBuilder.Build(remainingArguments[0], remainingArguments[1], resizeSettings, false);
+            var extensions = new IPlugin[] { new PrettyGifs(), new AnimatedGifs(), new NoopExtension() };
+            var source = remainingArguments[0];
+            var target = remainingArguments[1];
+            
+            ImageResizerUtil.ProcessImage(extensions, source, target);
 
             return 0;
         }

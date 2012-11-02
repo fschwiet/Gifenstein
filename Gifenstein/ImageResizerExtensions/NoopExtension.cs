@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
+using System;
 using ImageResizer.Configuration;
 using ImageResizer.Plugins;
 using ImageResizer.Resizing;
 
-namespace Gifenstein
+namespace Gifenstein.ImageResizerExtensions
 {
     public class NoopExtension : BuilderExtension, IPlugin
     {

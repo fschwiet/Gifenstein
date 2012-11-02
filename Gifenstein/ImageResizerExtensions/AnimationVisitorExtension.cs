@@ -1,0 +1,66 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Linq;
+using ImageResizer.Configuration;
+using ImageResizer.Plugins;
+using ImageResizer.Resizing;
+
+namespace Gifenstein.ImageResizerExtensions
+{
+    public class AnimationVisitorExtension : BuilderExtension, IPlugin
+    {
+        private readonly Action<Bitmap, Graphics, int> _visitor;
+        private int[] _delays;
+        private int _visitIndex;
+        protected Config c;
+
+        public AnimationVisitorExtension(Action<Bitmap,Graphics, int> visitor)
+        {
+            _visitor = visitor;
+        }
+
+        public IPlugin Install(Config c)
+        {
+            c.Plugins.add_plugin(this);
+            this.c = c;
+            return this;
+        }
+
+        public bool Uninstall(Config c)
+        {
+            c.Plugins.remove_plugin(this);
+            return true;
+        }
+
+        protected override RequestedAction PostRenderEffects(ImageState s)
+        {
+            _delays = _delays ?? GetDelays(s.sourceBitmap);
+
+            Console.WriteLine("visiting " + _visitIndex);
+            _visitor(s.destBitmap, s.destGraphics, _delays[_visitIndex++]);
+
+            return base.PostRenderEffects(s);
+        }
+
+        int[] GetDelays(Bitmap image)
+        {
+            List<int> results = new List<int>();
+
+            var frameDimension = image.FrameDimensionsList.Single();
+            var frameCount = image.GetFrameCount(new FrameDimension(frameDimension));
+
+            for (var i = 0; i < frameCount; i++)
+            {
+                image.SelectActiveFrame(new FrameDimension(frameDimension), i);
+
+                results.Add(image.Delay());
+            }
+
+            Console.WriteLine(string.Join(", ", results));
+
+            return results.ToArray();
+        }
+    }
+}

@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Gifenstein</RootNamespace>
     <AssemblyName>Gifenstein</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BumpKit">
+      <HintPath>..\packages\Bumpkit.1.0.1\lib\BumpKit.dll</HintPath>
+    </Reference>
     <Reference Include="ImageResizer">
       <HintPath>..\packages\ImageResizer.3.2.4\lib\ImageResizer.dll</HintPath>
     </Reference>
@@ -56,14 +60,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppendGifs.cs" />
+    <Compile Include="ImageResizerExtensions\NoopExtension.cs" />
+    <Compile Include="ImageResizerExtensions\AnimationVisitorExtension.cs" />
     <Compile Include="ImageExtensions.cs" />
     <Compile Include="ImageInfo.cs" />
-    <Compile Include="NoopExtension.cs" />
+    <Compile Include="ImageResizerUtil.cs" />
     <Compile Include="NoOpTransformCommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
