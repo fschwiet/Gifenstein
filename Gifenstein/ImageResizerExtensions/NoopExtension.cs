@@ -23,11 +23,12 @@ namespace Gifenstein.ImageResizerExtensions
 
         private int i = 0;
 
-        protected override RequestedAction PostRenderEffects(ImageState s)
+        protected override RequestedAction PostRenderImage(ImageState s)
         {
-            Console.WriteLine("PostLayoutEffects " + ++i);
-            
-            return base.PostLayoutEffects(s);
+            var color = s.destBitmap.GetPixel(0,0);
+
+            Console.WriteLine("PostLayoutEffects " + ++i + " color at (0,0): " + color);
+            return base.PostRenderImage(s);
         }
     }
 }

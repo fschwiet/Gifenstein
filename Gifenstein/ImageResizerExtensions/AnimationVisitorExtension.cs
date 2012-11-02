@@ -34,14 +34,13 @@ namespace Gifenstein.ImageResizerExtensions
             return true;
         }
 
-        protected override RequestedAction PostRenderEffects(ImageState s)
+        protected override RequestedAction PostRenderImage(ImageState s)
         {
             _delays = _delays ?? GetDelays(s.sourceBitmap);
 
-            Console.WriteLine("visiting " + _visitIndex);
             _visitor(s.destBitmap, s.destGraphics, _delays[_visitIndex++]);
 
-            return base.PostRenderEffects(s);
+            return base.PostRenderImage(s);
         }
 
         int[] GetDelays(Bitmap image)
@@ -57,8 +56,6 @@ namespace Gifenstein.ImageResizerExtensions
 
                 results.Add(image.Delay());
             }
-
-            Console.WriteLine(string.Join(", ", results));
 
             return results.ToArray();
         }

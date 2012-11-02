@@ -7,6 +7,7 @@ using BumpKit;
 using Gifenstein.ImageResizerExtensions;
 using ImageResizer.Plugins;
 using ImageResizer.Plugins.AnimatedGifs;
+using ImageResizer.Plugins.PrettyGifs;
 using ManyConsole;
 
 namespace Gifenstein
@@ -40,8 +41,9 @@ namespace Gifenstein
                 {
                     ImageResizerUtil.ProcessImage(new IPlugin[]
                     {
+                        new PrettyGifs(), 
                         new AnimatedGifs(),
-                        new AnimationVisitorExtension( (bitmap,graphic, delay) =>
+                        new AnimationVisitorExtension((bitmap,graphic, delay) =>
                         {
                             outputWriter.FrameDelay = TimeSpan.FromMilliseconds(delay);
                             outputWriter.AddFrame(bitmap);
