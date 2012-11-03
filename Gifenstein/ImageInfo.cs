@@ -29,7 +29,7 @@ namespace Gifenstein
                 {
                     image.SelectActiveFrame(new FrameDimension(frameDimension), i);
 
-                    Console.WriteLine("    Frame #{0} delay: {1}, loop count: {2}", i, image.Delay(), image.LoopCount());
+                    Console.WriteLine("    Frame #{0} delay: {1}, loop count: {2}", i, image.DelayMS(), image.LoopCount());
                 }
             }
 

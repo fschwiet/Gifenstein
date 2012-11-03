@@ -41,7 +41,7 @@ namespace Gifenstein.ImageResizerExtensions
         {
             _delays = _delays ?? GetDelays(s.sourceBitmap);
 
-            _visitor(s.destBitmap, s.destGraphics, _delays[_visitIndex++]);
+            _visitor((Bitmap)s.destBitmap.Clone(), s.destGraphics, _delays[_visitIndex++]);
 
             return base.PostRenderImage(s);
         }
@@ -57,20 +57,20 @@ namespace Gifenstein.ImageResizerExtensions
             {
                 image.SelectActiveFrame(new FrameDimension(frameDimension), i);
 
-                results.Add(image.Delay());
+                results.Add(image.DelayMS());
             }
 
             return results.ToArray();
         }
 
-        public static void Visit(object input, Action<Bitmap, Graphics, int> visitor)
+        public static void Visit(object input, Action<Bitmap, Graphics, int> visitor, object output = null)
         {
             ImageResizerUtil.ProcessImage(new IPlugin[]
             {
                 new PrettyGifs(),
                 new AnimatedGifs(),
                 new AnimationVisitorExtension(visitor)
-            }, input, new MemoryStream());
+            }, input, output ?? new MemoryStream());
         }
     }
 }

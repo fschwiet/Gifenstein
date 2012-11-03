@@ -9,9 +9,9 @@ namespace Gifenstein
     // See GdiPlusImaging.h
     public static class ImageExtensions
     {
-        public static int Delay(this Image image)
+        public static int DelayMS(this Image image)
         {
-            return BitConverter.ToInt16(image.GetPropertyItem(0x5100).Value, 0);
+            return BitConverter.ToInt16(image.GetPropertyItem(0x5100).Value, 0) * 10;
         }
 
         public static int LoopCount(this Image image)
