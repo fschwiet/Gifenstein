@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -29,16 +30,11 @@ namespace Gifenstein
             {
                 foreach(var inputFile in Inputs)
                 {
-                    ImageResizerUtil.ProcessImage(new IPlugin[]
+                    AnimationVisitorExtension.Visit(inputFile, (bitmap, graphic, delay) =>
                     {
-                        new PrettyGifs(), 
-                        new AnimatedGifs(),
-                        new AnimationVisitorExtension((bitmap,graphic, delay) =>
-                        {
-                            outputWriter.FrameDelay = TimeSpan.FromMilliseconds(delay);
-                            outputWriter.AddFrame(bitmap);
-                        })
-                    }, inputFile, new MemoryStream());
+                        outputWriter.FrameDelay = TimeSpan.FromMilliseconds(delay);
+                        outputWriter.AddFrame(bitmap);
+                    });
                 }
             }
 

@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using ImageResizer.Configuration;
 using ImageResizer.Plugins;
+using ImageResizer.Plugins.AnimatedGifs;
+using ImageResizer.Plugins.PrettyGifs;
 using ImageResizer.Resizing;
 
 namespace Gifenstein.ImageResizerExtensions
@@ -16,7 +19,7 @@ namespace Gifenstein.ImageResizerExtensions
         private int _visitIndex;
         protected Config c;
 
-        public AnimationVisitorExtension(Action<Bitmap,Graphics, int> visitor)
+        public AnimationVisitorExtension(Action<Bitmap, Graphics, int> visitor)
         {
             _visitor = visitor;
         }
@@ -58,6 +61,16 @@ namespace Gifenstein.ImageResizerExtensions
             }
 
             return results.ToArray();
+        }
+
+        public static void Visit(object input, Action<Bitmap, Graphics, int> visitor)
+        {
+            ImageResizerUtil.ProcessImage(new IPlugin[]
+            {
+                new PrettyGifs(),
+                new AnimatedGifs(),
+                new AnimationVisitorExtension(visitor)
+            }, input, new MemoryStream());
         }
     }
 }
