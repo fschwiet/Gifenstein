@@ -23,7 +23,7 @@ namespace Gifenstein
 
         public override int Run(string[] remainingArguments)
         {
-            var frames = GetFramesForSequentialAnimations();
+            var frames = GetFramesForSequentialAnimations(this.Inputs);
 
             var background = Image.FromFile(BackgroundImage);
 
@@ -53,12 +53,12 @@ namespace Gifenstein
             }
         }
 
-        private Frame[] GetFramesForSequentialAnimations()
+        private static Frame[] GetFramesForSequentialAnimations(List<string> inputs)
         {
             List<Frame> frames = new List<Frame>();
 
             int currentTime = 0;
-            foreach (var input in Inputs)
+            foreach (var input in inputs)
             {
                 AnimationVisitorExtension.Visit(input, (bitmap, graphic, duration) =>
                 {

@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlrightGentlemenCommand.cs" />
     <Compile Include="AppendGifs.cs" />
     <Compile Include="ConcurrentGifsCommand.cs" />
     <Compile Include="GifWritingCommand.cs" />
@@ -78,6 +79,11 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AlrightGentlemen_top.png" />
+    <EmbeddedResource Include="Resources\AlrightGentlemen_unimpressed.png" />
+    <EmbeddedResource Include="Resources\AlrightGentlemen_wow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
