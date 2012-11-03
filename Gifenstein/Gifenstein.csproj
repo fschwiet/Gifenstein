@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppendGifs.cs" />
+    <Compile Include="GifWritingCommand.cs" />
     <Compile Include="ImageResizerExtensions\NoopExtension.cs" />
     <Compile Include="ImageResizerExtensions\AnimationVisitorExtension.cs" />
     <Compile Include="Hmm\DronePandemic.cs" />
