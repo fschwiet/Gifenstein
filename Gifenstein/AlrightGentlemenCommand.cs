@@ -27,7 +27,8 @@ namespace Gifenstein
                 {
                     Image = image,
                     VerticalOffset = ImageHeight,
-                    Height = image.Height
+                    Height = image.Height,
+                    Source = v
                 });
 
                 ImageHeight += image.Height;
@@ -42,7 +43,8 @@ namespace Gifenstein
                 {
                     Image = image,
                     VerticalOffset = ImageHeight,
-                    Height = image.Height
+                    Height = image.Height,
+                    Source = v
                 });
 
                 ImageHeight += image.Height;
@@ -68,6 +70,10 @@ namespace Gifenstein
 
             backgroundImage.Save(Output);
 
+            var frames = ConcurrentGifsCommand.GetFramesForSequentialAnimations(Frames.Select(f => f.Source));
+
+            ConcurrentGifsCommand.WriteBackgroundForFrames(backgroundImage, frames, Output);
+
             return 0;
         }
 
@@ -76,6 +82,7 @@ namespace Gifenstein
             public int VerticalOffset;
             public int Height;
             public Image Image;
+            public string Source;
         }
     }
 }

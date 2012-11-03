@@ -27,7 +27,7 @@ namespace Gifenstein
 
             var background = Image.FromFile(BackgroundImage);
 
-            WriteBackgroundForFrames(background, frames);
+            WriteBackgroundForFrames(background, frames, Output);
 
             int position = 0;
 
@@ -40,9 +40,9 @@ namespace Gifenstein
             return 0;
         }
 
-        private void WriteBackgroundForFrames(Image background, Frame[] frames)
+        public static void WriteBackgroundForFrames(Image background, Frame[] frames, string outputPath)
         {
-            using (var output = File.OpenWrite(Output))
+            using (var output = File.OpenWrite(outputPath))
             using (var outputWriter = new GifEncoder(output))
             {
                 foreach (var frame in frames)
@@ -53,7 +53,7 @@ namespace Gifenstein
             }
         }
 
-        private static Frame[] GetFramesForSequentialAnimations(List<string> inputs)
+        public static Frame[] GetFramesForSequentialAnimations(IEnumerable<string> inputs)
         {
             List<Frame> frames = new List<Frame>();
 
