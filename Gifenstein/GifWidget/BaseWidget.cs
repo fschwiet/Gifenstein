@@ -6,9 +6,24 @@ using System.Text;
 
 namespace Gifenstein.GifWidget
 {
-    public interface BaseWidget
+    public class BaseWidget
     {
-        Point GetDimensions(Point incomingDimensions);
+        public virtual Point GetDimensions(Point incomingDimensions)
+        {
+            return incomingDimensions;    
+        }
 
+        public virtual void DrawBackground(Graphics gfx)
+        {
+        }
+
+        public virtual IEnumerable<ConcurrentGifsCommand.Frame> GetFrames(int endOfLastFrame)
+        {
+            return new ConcurrentGifsCommand.Frame[0];
+        }
+
+        public virtual void DrawFrame(ConcurrentGifsCommand.Frame frame, Graphics gfx)
+        {
+        }
     }
 }
