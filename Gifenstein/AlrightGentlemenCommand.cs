@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using Gifenstein.GifWidget;
 using Gifenstein.ImageResizerExtensions;
 using ManyConsole;
 
@@ -12,7 +14,8 @@ namespace Gifenstein
     {
         public string Text;
         public List<AlrightStep> Steps = new List<AlrightStep>();
-        public int ImageHeight;
+        public List<BaseWidget> Widgets = new List<BaseWidget>(); 
+        public Point ImageDimensions;
         private Dictionary<ConcurrentGifsCommand.Frame, AlrightStep> _frameToStep = new Dictionary<ConcurrentGifsCommand.Frame, AlrightStep>();
 
         public AlrightGentlemenCommand()
@@ -20,7 +23,7 @@ namespace Gifenstein
             this.IsCommand("alright-gentlemen", "Builder for 'Alright, Gentlemen'");
             this.HasOption("t=", "Text to use", v => Text = v);
 
-            ImageHeight = 0;
+            ImageDimensions = new Point(593, 0);
 
             var introImage = Image.FromStream(
                 this.GetType().Assembly.GetManifestResourceStream("Gifenstein.Resources.AlrightGentlemen_top.png"));
@@ -28,11 +31,11 @@ namespace Gifenstein
             Steps.Add(new AlrightStep()
             {
                 Image = introImage,
-                VerticalOffset = ImageHeight,
+                VerticalOffset = ImageDimensions.Y,
                 Height = introImage.Height,
             });
 
-            ImageHeight += introImage.Height;
+            ImageDimensions = new Point(ImageDimensions.X, ImageDimensions.Y + introImage.Height);
 
             this.HasOption("m=", "Gif animation to show as the next mild frame", v =>
             {
@@ -42,13 +45,13 @@ namespace Gifenstein
                 Steps.Add(new AlrightStep()
                 {
                     Image = image,
-                    VerticalOffset = ImageHeight,
+                    VerticalOffset = ImageDimensions.X,
                     Height = image.Height,
                     Source = v,
-                    Target = new Rectangle(4, ImageHeight + 5, 269, 200)
+                    Target = new Rectangle(4, ImageDimensions.X + 5, 269, 200)
                 });
 
-                ImageHeight += image.Height;
+                ImageDimensions = new Point(ImageDimensions.X, ImageDimensions.Y + image.Height);
             });
 
             this.HasOption("w=", "Gif animation to show as the next wild frame", v =>
@@ -59,13 +62,13 @@ namespace Gifenstein
                 Steps.Add(new AlrightStep()
                 {
                     Image = image,
-                    VerticalOffset = ImageHeight,
+                    VerticalOffset = ImageDimensions.Y,
                     Height = image.Height,
                     Source = v,
-                    Target = new Rectangle(5, ImageHeight + 6, 269, 200)
+                    Target = new Rectangle(5, ImageDimensions.Y + 6, 269, 200)
                 });
 
-                ImageHeight += image.Height;
+                ImageDimensions = new Point(ImageDimensions.X, ImageDimensions.Y + image.Height);
             });
         }
 
@@ -79,7 +82,7 @@ namespace Gifenstein
 
         public override int Run(string[] remainingArguments)
         {
-            var backgroundImage = new Bitmap(593, ImageHeight);
+            var backgroundImage = new Bitmap(ImageDimensions.Y, ImageDimensions.X);
             using(var gfx = Graphics.FromImage(backgroundImage))
             foreach(var frame in Steps)
             {
@@ -117,7 +120,7 @@ namespace Gifenstein
                     timePlayedMS += timePlayedMs;
                     Console.WriteLine(step.Source + " took " + timePlayedMs);
                 }
-             }
+            }
 
             ConcurrentGifsCommand.WriteBackgroundForFrames(backgroundImage, animationFrames, Output);
 
@@ -131,6 +134,8 @@ namespace Gifenstein
                 graphics.DrawImage(animationFrame.Image, _frameToStep[animationFrame].Target);
                 currentFrame++;
             }, output:Output);
+
+            Console.WriteLine("Created filesize of {0} was {1}k.", Path.GetFullPath(Output), new FileInfo(Output).Length / 1000.0);
 
             return 0;
         }

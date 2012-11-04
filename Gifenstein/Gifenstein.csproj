@@ -63,6 +63,7 @@
     <Compile Include="AlrightGentlemenCommand.cs" />
     <Compile Include="AppendGifs.cs" />
     <Compile Include="ConcurrentGifsCommand.cs" />
+    <Compile Include="GifWidget\BaseWidget.cs" />
     <Compile Include="GifWritingCommand.cs" />
     <Compile Include="ImageResizerExtensions\NoopExtension.cs" />
     <Compile Include="ImageResizerExtensions\AnimationVisitorExtension.cs" />
