@@ -5,29 +5,27 @@ namespace Gifenstein.GifWidget
 {
     public class AlrightStep : BaseWidget
     {
+        public int VerticalOffset;
+        Image _image;
+        string _templatePath;
+
         public AlrightStep(string templatePath)
         {
             _templatePath = templatePath;
         }
 
-        public Image Image;
-        public int VerticalOffset;
-        public int Height;
-        string _templatePath;
-
         public override Point GetDimensions(Point incomingDimensions)
         {
-            Image = Image.FromStream(this.GetType().Assembly.GetManifestResourceStream(_templatePath));
+            _image = Image.FromStream(this.GetType().Assembly.GetManifestResourceStream(_templatePath));
 
             VerticalOffset = incomingDimensions.Y;
-            Height = Image.Height;
 
-            return new Point(Math.Max(incomingDimensions.X, Image.Width), incomingDimensions.Y + Image.Height);
+            return new Point(Math.Max(incomingDimensions.X, _image.Width), incomingDimensions.Y + _image.Height);
         }
 
         public override void DrawBackground(Graphics gfx)
         {
-            gfx.DrawImageUnscaledAndClipped(Image, new Rectangle(0, VerticalOffset, Image.Width, Image.Height));
+            gfx.DrawImageUnscaledAndClipped(_image, new Rectangle(0, VerticalOffset, _image.Width, _image.Height));
         }
     }
 }

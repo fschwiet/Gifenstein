@@ -37,11 +37,6 @@ namespace Gifenstein.GifWidget
             };
         }
 
-        public override void DrawBackground(System.Drawing.Graphics gfx)
-        {
-            base.DrawBackground(gfx);
-        }
-
         public override void DrawFrame(ConcurrentGifsCommand.Frame frame, Graphics gfx)
         {
             if (frame.Start >= _startTime)
