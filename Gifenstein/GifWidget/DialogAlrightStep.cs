@@ -17,10 +17,15 @@ namespace Gifenstein.GifWidget
 
         public override void DrawBackground(System.Drawing.Graphics gfx)
         {
+            base.DrawBackground(gfx);
+
             gfx.DrawString(_text, new Font(FontFamily.GenericSansSerif, 12), new SolidBrush(Color.Black),
                 new RectangleF(24, VerticalOffset + 60, 305, 110));
+        }
 
-            base.DrawBackground(gfx);
+        public override string ToString()
+        {
+            return String.Format("{0} ({1})", this.GetType().Name, _text);
         }
     }
 }

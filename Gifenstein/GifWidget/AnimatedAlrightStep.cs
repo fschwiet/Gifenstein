@@ -38,15 +38,39 @@ namespace Gifenstein.GifWidget
             return result;
         }
 
-        public override void DrawFrame(ConcurrentGifsCommand.Frame frame, Graphics gfx)
+        public override void DrawFrame(ConcurrentGifsCommand.Frame currentFrame, Graphics gfx)
         {
-            if (!_frames.Contains(frame))
-                return;
+            if (_frames.Contains(currentFrame))
+            {
+                DrawPositionFrame(currentFrame, gfx);
+            }
+            else
+            {
+                var widgetStart = _frames.First().Start;
+                var widgetDuration = _frames.Last().End - widgetStart;
 
-            gfx.DrawImage(frame.Image, 
-                new Rectangle(
-                    _animagedGifTemplateLocation.X, _animagedGifTemplateLocation.Y + VerticalOffset,
-                    _animagedGifTemplateLocation.Width, _animagedGifTemplateLocation.Height));
+                if (currentFrame.Start > widgetStart)
+                {
+                    var relativePosition = (currentFrame.Start - widgetStart) % widgetDuration;
+                    var relativeFrame = _frames.Where(f => f.Start <= widgetStart + relativePosition).LastOrDefault();
+                    
+                    DrawFrame(relativeFrame, gfx);
+                }
+            }
+
+        }
+
+        void DrawPositionFrame(ConcurrentGifsCommand.Frame frame, Graphics gfx)
+        {
+            gfx.DrawImage(frame.Image,
+                          new Rectangle(
+                              _animagedGifTemplateLocation.X, _animagedGifTemplateLocation.Y + VerticalOffset,
+                              _animagedGifTemplateLocation.Width, _animagedGifTemplateLocation.Height));
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0} ({1})", this.GetType().Name, _animatedGifPath);
         }
     }
 }
