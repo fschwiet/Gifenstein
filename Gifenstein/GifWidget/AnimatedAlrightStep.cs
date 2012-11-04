@@ -9,6 +9,8 @@ namespace Gifenstein.GifWidget
         readonly string _animatedGifPath;
         readonly Rectangle _animagedGifTemplateLocation;
         List<ConcurrentGifsCommand.Frame> _frames;
+        const int MinIntroTrime = 1500;
+        const int MaxIntroTime = 2500;
 
         public AnimatedAlrightStep(string templatePath, string animatedGifPath, Rectangle animagedGifTemplateLocation) : base(templatePath)
         {
@@ -22,7 +24,7 @@ namespace Gifenstein.GifWidget
 
             List<ConcurrentGifsCommand.Frame> result = new List<ConcurrentGifsCommand.Frame>(); 
 
-            while (timePlayedMS < 1000)
+            while (timePlayedMS < MinIntroTrime)
             {
                 var lastPosition = endOfLastFrame;
 
@@ -35,7 +37,8 @@ namespace Gifenstein.GifWidget
             }
 
             _frames = result;
-            return result;
+            
+            return result.Where(r => r.Start - endOfLastFrame < MaxIntroTime);
         }
 
         public override void DrawFrame(ConcurrentGifsCommand.Frame currentFrame, Graphics gfx)

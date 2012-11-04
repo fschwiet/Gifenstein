@@ -8,7 +8,7 @@ $gifenstein = ".\Gifenstein\bin\Debug\Gifenstein.exe"
 & $gifenstein append-gifs -n .\media\look_how_unrustled.gif -n .\media\look_how_unrustled.gif -o .\temp\append.gif
 
 & $gifenstein alright-gentlemen -o .\temp\alright-gentleman.gif `
-  -t "we're going to master the gif technology" `
+  -t "we're going to master that gif technology" `
   -m .\media\look_how_unrustled.gif  `
   -m '.\media\haters gonna hate.gif' `
   -w '.\media\not the bees.gif'
