@@ -4,7 +4,7 @@ namespace Gifenstein
 {
     public abstract class GifWritingCommand : ConsoleCommand
     {
-        protected string Output;
+        public string Output;
 
         public GifWritingCommand()
         {

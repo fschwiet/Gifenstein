@@ -40,7 +40,7 @@ namespace Gifenstein
             return 0;
         }
 
-        public static void WriteBackgroundForFrames(Image background, Frame[] frames, string outputPath)
+        public static void WriteBackgroundForFrames(Image background, IEnumerable<Frame> frames, string outputPath)
         {
             using (var output = File.OpenWrite(outputPath))
             using (var outputWriter = new GifEncoder(output))
@@ -53,11 +53,11 @@ namespace Gifenstein
             }
         }
 
-        public static Frame[] GetFramesForSequentialAnimations(IEnumerable<string> inputs)
+        public static Frame[] GetFramesForSequentialAnimations(IEnumerable<string> inputs, int startTime = 0)
         {
             List<Frame> frames = new List<Frame>();
 
-            int currentTime = 0;
+            int currentTime = startTime;
             foreach (var input in inputs)
             {
                 AnimationVisitorExtension.Visit(input, (bitmap, graphic, duration) =>
