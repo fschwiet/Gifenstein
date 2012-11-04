@@ -95,20 +95,29 @@ namespace Gifenstein
                 if (string.IsNullOrEmpty(step.Source))
                     continue;
 
-                var lastPosition = 0;
-                
-                if (animationFrames.Any())
-                    lastPosition = animationFrames.Last().End;
+                var timePlayedMS = 0;
 
-                var newFrames = ConcurrentGifsCommand.GetFramesForSequentialAnimations(new[] {step.Source}, lastPosition);
-
-                animationFrames.AddRange(newFrames);
-
-                foreach(var frame in newFrames)
+                while(timePlayedMS < 1000)
                 {
-                    _frameToStep[frame] = step;
+                    var lastPosition = 0;
+
+                    if (animationFrames.Any())
+                        lastPosition = animationFrames.Last().End;
+
+                    var newFrames = ConcurrentGifsCommand.GetFramesForSequentialAnimations(new[] { step.Source }, lastPosition);
+
+                    animationFrames.AddRange(newFrames);
+
+                    foreach (var frame in newFrames)
+                    {
+                        _frameToStep[frame] = step;
+                    }
+
+                    var timePlayedMs = (newFrames.Last().End - newFrames.First().Start);
+                    timePlayedMS += timePlayedMs;
+                    Console.WriteLine(step.Source + " took " + timePlayedMs);
                 }
-            }
+             }
 
             ConcurrentGifsCommand.WriteBackgroundForFrames(backgroundImage, animationFrames, Output);
 
