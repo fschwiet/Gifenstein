@@ -10,6 +10,7 @@ namespace Gifenstein
 {
     public class AlrightGentlemenCommand : GifWritingCommand
     {
+        public string Text;
         public List<AlrightStep> Steps = new List<AlrightStep>();
         public int ImageHeight;
         private Dictionary<ConcurrentGifsCommand.Frame, AlrightStep> _frameToStep = new Dictionary<ConcurrentGifsCommand.Frame, AlrightStep>();
@@ -17,8 +18,21 @@ namespace Gifenstein
         public AlrightGentlemenCommand()
         {
             this.IsCommand("alright-gentlemen", "Builder for 'Alright, Gentlemen'");
+            this.HasOption("t=", "Text to use", v => Text = v);
 
             ImageHeight = 0;
+
+            var introImage = Image.FromStream(
+                this.GetType().Assembly.GetManifestResourceStream("Gifenstein.Resources.AlrightGentlemen_top.png"));
+
+            Steps.Add(new AlrightStep()
+            {
+                Image = introImage,
+                VerticalOffset = ImageHeight,
+                Height = introImage.Height,
+            });
+
+            ImageHeight += introImage.Height;
 
             this.HasOption("m=", "Gif animation to show as the next mild frame", v =>
             {
@@ -78,6 +92,9 @@ namespace Gifenstein
 
             foreach(var step in Steps)
             {
+                if (string.IsNullOrEmpty(step.Source))
+                    continue;
+
                 var lastPosition = 0;
                 
                 if (animationFrames.Any())
@@ -100,8 +117,9 @@ namespace Gifenstein
             AnimationVisitorExtension.Visit(Output, (bitmap, graphics, delay) =>
             {
                 var animationFrame = animationFrames[currentFrame];
+                graphics.DrawString(Text, new Font(FontFamily.GenericSansSerif, 12), new SolidBrush(Color.Black),
+                    new RectangleF(24, 60, 305, 110));
                 graphics.DrawImage(animationFrame.Image, _frameToStep[animationFrame].Target);
-                Console.WriteLine("drawing to " + _frameToStep[animationFrame].Target);
                 currentFrame++;
             }, output:Output);
 
