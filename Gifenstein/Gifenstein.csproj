@@ -85,9 +85,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\AlrightGentlemen_top.png" />
-    <EmbeddedResource Include="Resources\AlrightGentlemen_unimpressed.png" />
-    <EmbeddedResource Include="Resources\AlrightGentlemen_wow.png" />
+    <EmbeddedResource Include="Resources\AllRightGentlemen_dialog.png" />
+    <EmbeddedResource Include="Resources\AllRightGentlemen_impressed.png" />
+    <EmbeddedResource Include="Resources\AllRightGentlemen_unimpressed.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -13,7 +13,8 @@ namespace Gifenstein.GifWidget
         const int waitBeforeText = 800;
         const int waitAfterText = 800;
 
-        public DialogAlrightStep(string text) : base("Gifenstein.Resources.AlrightGentlemen_top.png")
+        public DialogAlrightStep(string text)
+            : base("Gifenstein.Resources.AllRightGentlemen_dialog.png")
         {
             _text = text;
         }

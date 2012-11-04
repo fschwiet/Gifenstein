@@ -22,10 +22,10 @@ namespace Gifenstein
             this.HasOption("t=", "Text spoken in the next frame.", v => Steps.Add(new DialogAlrightStep(v)));
 
             this.HasOption("m=", "Gif animation drawn within an unexcited frame", v =>
-                Steps.Add(new AnimatedAlrightStep("Gifenstein.Resources.AlrightGentlemen_unimpressed.png", v, new Rectangle(4,5,269,200))));
+                Steps.Add(new AnimatedAlrightStep("Gifenstein.Resources.AllRightGentlemen_unimpressed.png", v, new Rectangle(5,8,270,201))));
 
             this.HasOption("w=", "Gif animation drawn withn an excited frame", v =>
-                Steps.Add(new AnimatedAlrightStep("Gifenstein.Resources.AlrightGentlemen_wow.png", v, new Rectangle(5,6,269,200))));
+                Steps.Add(new AnimatedAlrightStep("Gifenstein.Resources.AllRightGentlemen_impressed.png", v, new Rectangle(5, 6, 270,203))));
         }
 
         public override int? OverrideAfterHandlingArgumentsBeforeRun(string[] remainingArguments)
