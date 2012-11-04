@@ -64,8 +64,10 @@
     <Compile Include="AppendGifs.cs" />
     <Compile Include="ConcurrentGifsCommand.cs" />
     <Compile Include="GifWidget\AlrightStep.cs" />
+    <Compile Include="GifWidget\AlrightUnimpressedStep.cs" />
     <Compile Include="GifWidget\AnimatedAlrightStep.cs" />
     <Compile Include="GifWidget\BaseWidget.cs" />
+    <Compile Include="GifWidget\AlrightImpressedStep.cs" />
     <Compile Include="GifWidget\DialogAlrightStep.cs" />
     <Compile Include="GifWritingCommand.cs" />
     <Compile Include="ImageResizerExtensions\NoopExtension.cs" />

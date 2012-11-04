@@ -7,7 +7,7 @@ namespace Gifenstein.GifWidget
     public class AnimatedAlrightStep : AlrightStep
     {
         readonly string _animatedGifPath;
-        readonly Rectangle _animagedGifTemplateLocation;
+        protected Rectangle _animagedGifTemplateLocation;
         List<ConcurrentGifsCommand.Frame> _frames;
         const int MinIntroTrime = 1500;
         const int MaxIntroTime = 2500;
