@@ -31,7 +31,7 @@ namespace Gifenstein
                     VerticalOffset = ImageHeight,
                     Height = image.Height,
                     Source = v,
-                    Target = new Rectangle(10, ImageHeight + 10, 100, ImageHeight + 90)
+                    Target = new Rectangle(4, ImageHeight + 5, 269, 200)
                 });
 
                 ImageHeight += image.Height;
@@ -48,7 +48,7 @@ namespace Gifenstein
                     VerticalOffset = ImageHeight,
                     Height = image.Height,
                     Source = v,
-                    Target = new Rectangle(10, ImageHeight + 10, 100, 100)
+                    Target = new Rectangle(5, ImageHeight + 6, 269, 200)
                 });
 
                 ImageHeight += image.Height;
