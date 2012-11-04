@@ -1,1 +1,1 @@
-.\Gifenstein\bin\Debug\Gifenstein.exe alright-gentlemen -o c:\temp.gif -m .\media\look_how_unrustled.gif -m '.\media\didnt read lol.gif' -w '.\media\not the bees.gif' -t "we're going to master the gif technology"
+.\Gifenstein\bin\Debug\Gifenstein.exe alright-gentlemen -o c:\temp.gif -m .\media\look_how_unrustled.gif -m '.\media\haters gonna hate.gif' -w '.\media\not the bees.gif' -t "we're going to master the gif technology"
