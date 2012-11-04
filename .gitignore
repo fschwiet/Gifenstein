@@ -7,3 +7,4 @@ _ReSharper.*
 *.sln.cache
 *.dotCover
 *.user
+temp
