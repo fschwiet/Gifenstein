@@ -15,6 +15,7 @@ namespace Gifenstein
         public List<BaseWidget> Steps = new List<BaseWidget>();
         public Point ImageDimensions;
         private Dictionary<ConcurrentGifsCommand.Frame, AlrightStep> _frameToStep = new Dictionary<ConcurrentGifsCommand.Frame, AlrightStep>();
+        private int? RemoveEveryNFrames;
 
         public AlrightGentlemenCommand()
         {
@@ -26,6 +27,8 @@ namespace Gifenstein
 
             this.HasOption("w=", "Gif animation drawn withn an excited frame", v =>
                 Steps.Add(new AlrightImpressedStep(v)));
+
+            this.HasOption<int>("r=", "Remove every <r> frames ", v => RemoveEveryNFrames = v);
         }
 
         public override int? OverrideAfterHandlingArgumentsBeforeRun(string[] remainingArguments)
@@ -64,6 +67,11 @@ namespace Gifenstein
                     lastPosition = animationFrames.Last().End;
 
                 animationFrames.AddRange(widget.GetFrames(lastPosition));
+            }
+
+            if (RemoveEveryNFrames.HasValue)
+            {
+                animationFrames = animationFrames.Where((f, i) => (i + 1) % RemoveEveryNFrames.Value != 0).ToList();
             }
 
             ConcurrentGifsCommand.WriteBackgroundForFrames(backgroundImage, animationFrames, Output);
