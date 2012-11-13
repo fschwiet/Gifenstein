@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="AlrightGentlemenCommand.cs" />
     <Compile Include="AppendGifs.cs" />
+    <Compile Include="Cheezburger\OhaiCommand.cs" />
     <Compile Include="ConcurrentGifsCommand.cs" />
     <Compile Include="GifWidget\AlrightStep.cs" />
     <Compile Include="GifWidget\AlrightUnimpressedStep.cs" />
