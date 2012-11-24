@@ -75,20 +75,35 @@
         }
     ];
 
-    for (var i = 0; i < source.length; i++) {
-        var row = rowTypeManager.BuildRow(source[i].type);
+    function GetRenderredRow(name) {
+        var row = rowTypeManager.BuildRow(name);
 
         var previousButton = $("<img>").attr("src", "/Content/previous.png").addClass("previous");
         var nextButton = $("<img>").attr("src", "/Content/next.png").addClass("next");
 
 
-        var adjacentTypes = rowTypeManager.GetAdjacent(source[i].type);
+        var adjacentTypes = rowTypeManager.GetAdjacent(name);
 
         var renderredRow = row.Render();
         renderredRow.append(previousButton);
         renderredRow.append(nextButton);
 
+        previousButton.click(function () {
+            var newRenderred = GetRenderredRow(adjacentTypes[0]);
+            renderredRow.replaceWith(newRenderred);
+        });
 
-        $("#sortable").append(renderredRow);
+        nextButton.click(function () {
+            var newRenderred = GetRenderredRow(adjacentTypes[1]);
+            renderredRow.replaceWith(newRenderred);
+        });
+
+        return renderredRow;
+    }
+
+    for (var i = 0; i < source.length; i++) {
+        var renderred = GetRenderredRow(source[i].type);
+
+        $("#sortable").append(renderred);
     }
 </script>
