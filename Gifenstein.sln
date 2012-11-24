@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gifenstein", "Gifenstein\Gifenstein.csproj", "{B1F868D2-71A5-4F1C-A759-97DCEA34E14E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frontpage", "Frontpage\Frontpage.csproj", "{786C4298-31A6-47F8-AECE-C534450A4DD1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{B1F868D2-71A5-4F1C-A759-97DCEA34E14E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1F868D2-71A5-4F1C-A759-97DCEA34E14E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1F868D2-71A5-4F1C-A759-97DCEA34E14E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{786C4298-31A6-47F8-AECE-C534450A4DD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{786C4298-31A6-47F8-AECE-C534450A4DD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{786C4298-31A6-47F8-AECE-C534450A4DD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{786C4298-31A6-47F8-AECE-C534450A4DD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
