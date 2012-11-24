@@ -7,27 +7,70 @@
 @section Header {
     <style type="text/css">
     #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-    #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
-    #sortable li span { position: absolute; margin-left: -1.3em; }
     </style>
     <script>
-    $(function() {
-        $( "#sortable" ).sortable();
-        $( "#sortable" ).disableSelection();
-    });
+        $(function() {
+            $( "#sortable" ).sortable();
+            $( "#sortable" ).disableSelection();
+        });
+    
+        function ImageRow()
+        {
+        }
+
+        ImageRow.prototype.Render = function() {
+            var result = $("<li><img></li>");
+            result.find("img").attr("src", this.imageUrl);
+            return result;
+        };
+        
+        function AllRightAnnouncement() {
+            this.imageUrl = "http://i.imgur.com/SvOaeb.jpg";
+        }
+
+        $.extend(AllRightAnnouncement.prototype, ImageRow.prototype);
+
+        function AllRightMinor() {
+            this.imageUrl = "http://i.imgur.com/SvOaeb.jpg";
+        }
+
+        $.extend(AllRightMinor.prototype, ImageRow.prototype);
+
+        function AllRightMajor() {
+            this.imageUrl = "http://i.imgur.com/SvOaeb.jpg";
+        }
+
+        $.extend(AllRightMajor.prototype, ImageRow.prototype);
+
+        var rowTypes = {};
+        rowTypes["AllRightAnnouncement"] = AllRightAnnouncement;
+        rowTypes["AllRightMinor"] = AllRightMinor;
+        rowTypes["AllRightMajor"] = AllRightMajor;
     </script>    
 }
 <h2>We're going to make a gif.</h2>
 
  
 <ul id="sortable">
-    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
-    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
-    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
-    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
-    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
-    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
-    <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
 </ul>
  
  
+<script type="text/javascript">
+
+    var source = [
+        {
+            type: "AllRightAnnouncement"
+        },
+        {
+            type: "AllRightMinor"
+        },
+        {
+            type: "AllRightMajor"
+        }
+    ];
+
+    for (var i = 0; i < source.length; i++) {
+        var row = rowTypes[source[i].type];
+        $("#sortable").append(new row().Render());
+    }
+</script>
