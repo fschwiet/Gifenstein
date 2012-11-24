@@ -1,4 +1,5 @@
 ﻿using System.Web.Optimization;
+using Frontpage.BundleUtil;
 
 namespace Frontpage.App_Start
 {
@@ -6,8 +7,9 @@ namespace Frontpage.App_Start
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
-            var jsBundle = new ScriptBundle("~/bundles/js")
-                .Include("~/Scripts/lib/jquery-{version}.js")
+            var frontpageAll = new ScriptBundle("~/bundles/js");
+
+            frontpageAll.Include("~/Scripts/lib/jquery-{version}.js")
                 .Include(
                     "~/Scripts/lib/jquery.ui.core.js",
                     "~/Scripts/lib/jquery.ui.widget.js",
@@ -15,7 +17,12 @@ namespace Frontpage.App_Start
                     "~/Scripts/lib/jquery.ui.sortable.js")
                 .IncludeDirectory("~/Scripts/frontpage", "*.js");
 
-            bundles.Add(jsBundle);
+
+            var frontpage = new NontestBundle("~/bundles/frontpage", frontpageAll);
+            var frontpageTest = new TestBundle("~/bundles/frontpage-test", frontpageAll);
+
+            bundles.Add(frontpage);
+            bundles.Add(frontpageTest);
         }
     }
 }

@@ -114,6 +114,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="BundleUtil\NontestBundle.cs" />
+    <Compile Include="BundleUtil\TestBundle.cs" />
+    <Compile Include="BundleUtil\WrappingBundle.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
