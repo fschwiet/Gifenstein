@@ -118,6 +118,7 @@
     <Compile Include="BundleUtil\TestBundle.cs" />
     <Compile Include="BundleUtil\WrappingBundle.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JasmineController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -130,9 +131,19 @@
     <Content Include="Content\AllRightGentlemen_dialog.png" />
     <Content Include="Content\AllRightGentlemen_impressed.png" />
     <Content Include="Content\AllRightGentlemen_unimpressed.png" />
+    <Content Include="Content\jasmine\jasmine.css" />
+    <Content Include="Content\jasmine\jasmine_favicon.png" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\frontpage\RowTypeManager.test.js" />
+    <Content Include="Scripts\jasmine\jasmine-html.js" />
+    <Content Include="Scripts\jasmine\jasmine.js" />
+    <Content Include="Scripts\jasmine\MIT.LICENSE" />
     <None Include="Scripts\lib\jquery-1.4.4-vsdoc.js" />
     <Content Include="Scripts\frontpage\RowTypeManager.js" />
+    <Content Include="Scripts\jasmine-samples\Player.js" />
+    <Content Include="Scripts\jasmine-samples\PlayerSpec.js" />
+    <Content Include="Scripts\jasmine-samples\Song.js" />
+    <Content Include="Scripts\jasmine-samples\SpecHelper.js" />
     <Content Include="Scripts\lib\jquery-1.4.4.js" />
     <Content Include="Scripts\lib\jquery-1.4.4.min.js" />
     <Content Include="Scripts\lib\jquery.ui.core.js" />
@@ -153,6 +164,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Jasmine\SpecRunner.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
