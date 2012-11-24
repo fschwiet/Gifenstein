@@ -12,10 +12,13 @@
 
         #sortable img.previous { left: 0;top: 20px; position: absolute}
         #sortable img.next { right: 0; top: 20px; position: absolute}
+        #sortable img.drag { right: 180px; top: 20px;position: absolute; cursor: move}
     </style>
     <script>
         $(function() {
-            $( "#sortable" ).sortable();
+            $("#sortable").sortable({
+                handle: "img.drag"
+            });
             $( "#sortable" ).disableSelection();
         });
     
@@ -80,6 +83,7 @@
 
         var previousButton = $("<img>").attr("src", "/Content/previous.png").addClass("previous");
         var nextButton = $("<img>").attr("src", "/Content/next.png").addClass("next");
+        var dragGrip = $("<img>").attr("src", "/Content/cursor_drag_arrow.jpg").addClass("drag");
 
 
         var adjacentTypes = rowTypeManager.GetAdjacent(name);
@@ -87,6 +91,7 @@
         var renderredRow = row.Render();
         renderredRow.append(previousButton);
         renderredRow.append(nextButton);
+        renderredRow.append(dragGrip);
 
         previousButton.click(function () {
             var newRenderred = GetRenderredRow(adjacentTypes[0]);
