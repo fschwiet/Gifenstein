@@ -6,7 +6,12 @@
 
 @section Header {
     <style type="text/css">
-    #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+        #sortable {list-style-type: none; margin: 0; padding: 0 }
+
+        #sortable li {display: block; position: relative; width:592px }
+
+        #sortable img.previous { left: 0;top: 20px; position: absolute}
+        #sortable img.next { right: 0; top: 20px; position: absolute}
     </style>
     <script>
         $(function() {
@@ -73,6 +78,17 @@
     for (var i = 0; i < source.length; i++) {
         var row = rowTypeManager.BuildRow(source[i].type);
 
-        $("#sortable").append(row.Render());
+        var previousButton = $("<img>").attr("src", "/Content/previous.png").addClass("previous");
+        var nextButton = $("<img>").attr("src", "/Content/next.png").addClass("next");
+
+
+        var adjacentTypes = rowTypeManager.GetAdjacent(source[i].type);
+
+        var renderredRow = row.Render();
+        renderredRow.append(previousButton);
+        renderredRow.append(nextButton);
+
+
+        $("#sortable").append(renderredRow);
     }
 </script>
