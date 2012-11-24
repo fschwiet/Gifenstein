@@ -128,6 +128,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\add-icon.png" />
     <Content Include="Content\AllRightGentlemen_dialog.png" />
     <Content Include="Content\AllRightGentlemen_impressed.png" />
     <Content Include="Content\AllRightGentlemen_unimpressed.png" />
@@ -136,6 +137,7 @@
     <Content Include="Content\jasmine\jasmine_favicon.png" />
     <Content Include="Content\next.png" />
     <Content Include="Content\previous.png" />
+    <Content Include="Content\x_icon.png" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\frontpage\RowTypeManager.test.js" />
     <Content Include="Scripts\jasmine\jasmine-html.js" />

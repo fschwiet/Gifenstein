@@ -14,6 +14,7 @@
         #sortable img.next { right: 0; top: 20px; position: absolute}
         #sortable img.drag { right: 180px; top: 20px;position: absolute; cursor: move}
         #sortable img.delete { right: 120px; top: 20px;position: absolute; cursor: move}
+        img.add { padding-left: 234px}
     </style>
     <script>
         $(function() {
@@ -60,9 +61,10 @@
 }
 <h2>We're going to make a gif.</h2>
 
- 
+<img class="add add-before" src="/Content/add-icon.png"/>
 <ul id="sortable">
 </ul>
+<img class="add add-after" src="/Content/add-icon.png"/>
  
  
 <script type="text/javascript">
@@ -118,4 +120,12 @@
 
         $("#sortable").append(renderred);
     }
+
+    $("img.add-before").click(function () {
+        $("#sortable").prepend(GetRenderredRow(rowTypeManager.GetFirstType()));
+    });
+    
+    $("img.add-after").click(function () {
+        $("#sortable").append(GetRenderredRow(rowTypeManager.GetLastType()));
+    });
 </script>

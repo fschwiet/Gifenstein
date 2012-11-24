@@ -22,3 +22,11 @@ RowTypeManager.prototype.GetAdjacent = function(name) {
     var typeCount = this._rowList.length;
     return [this._rowList[(index - 1 + typeCount) % typeCount], this._rowList[(index + 1 + typeCount) % typeCount]];
 };
+
+RowTypeManager.prototype.GetFirstType = function() {
+    return this._rowList[0];
+};
+
+RowTypeManager.prototype.GetLastType = function() {
+    return this._rowList[this._rowList.length - 1];
+};
