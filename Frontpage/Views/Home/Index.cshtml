@@ -42,10 +42,29 @@
 
         $.extend(AllRightMajor.prototype, ImageRow.prototype);
 
-        var rowTypes = {};
-        rowTypes["AllRightAnnouncement"] = AllRightAnnouncement;
-        rowTypes["AllRightMinor"] = AllRightMinor;
-        rowTypes["AllRightMajor"] = AllRightMajor;
+        function RowTypeManager() {
+            this._rowTypes = {};
+            this._rowList = [];
+        }
+
+        RowTypeManager.prototype.addRowType = function(name) {
+            this._rowTypes[name] = {
+                constructor: window[name],
+                index: this._rowList.length
+            };
+            this._rowList.push(name);
+        };
+
+        RowTypeManager.prototype.BuildRow = function(name) {
+            var constructor = this._rowTypes[name].constructor;
+            return new constructor();
+        };
+
+        var rowTypeManager = new RowTypeManager();
+
+        rowTypeManager.addRowType("AllRightAnnouncement");
+        rowTypeManager.addRowType("AllRightMinor");
+        rowTypeManager.addRowType("AllRightMajor");
     </script>    
 }
 <h2>We're going to make a gif.</h2>
@@ -70,7 +89,8 @@
     ];
 
     for (var i = 0; i < source.length; i++) {
-        var row = rowTypes[source[i].type];
-        $("#sortable").append(new row().Render());
+        var row = rowTypeManager.BuildRow(source[i].type);
+
+        $("#sortable").append(row.Render());
     }
 </script>
