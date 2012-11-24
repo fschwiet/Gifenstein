@@ -124,6 +124,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\AllRightGentlemen_dialog.png" />
+    <Content Include="Content\AllRightGentlemen_impressed.png" />
+    <Content Include="Content\AllRightGentlemen_unimpressed.png" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.4.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.4.js" />
