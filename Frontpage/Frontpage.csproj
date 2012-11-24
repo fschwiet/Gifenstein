@@ -140,10 +140,6 @@
     <Content Include="Scripts\jasmine\MIT.LICENSE" />
     <None Include="Scripts\lib\jquery-1.4.4-vsdoc.js" />
     <Content Include="Scripts\frontpage\RowTypeManager.js" />
-    <Content Include="Scripts\jasmine-samples\Player.js" />
-    <Content Include="Scripts\jasmine-samples\PlayerSpec.js" />
-    <Content Include="Scripts\jasmine-samples\Song.js" />
-    <Content Include="Scripts\jasmine-samples\SpecHelper.js" />
     <Content Include="Scripts\lib\jquery-1.4.4.js" />
     <Content Include="Scripts\lib\jquery-1.4.4.min.js" />
     <Content Include="Scripts\lib\jquery.ui.core.js" />

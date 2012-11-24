@@ -16,3 +16,9 @@ RowTypeManager.prototype.BuildRow = function (name) {
     var constructor = this._rowTypes[name].constructor;
     return new constructor();
 };
+
+RowTypeManager.prototype.GetAdjacent = function(name) {
+    var index = this._rowTypes[name].index;
+    var typeCount = this._rowList.length;
+    return [this._rowList[(index - 1 + typeCount) % typeCount], this._rowList[(index + 1 + typeCount) % typeCount]];
+};
