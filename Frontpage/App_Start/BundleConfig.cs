@@ -7,12 +7,13 @@ namespace Frontpage.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
             var jsBundle = new ScriptBundle("~/bundles/js")
-                .Include("~/Scripts/jquery-{version}.js")
+                .Include("~/Scripts/lib/jquery-{version}.js")
                 .Include(
-                    "~/Scripts/jquery.ui.core.js",
-                    "~/Scripts/jquery.ui.widget.js",
-                    "~/Scripts/jquery.ui.mouse.js", 
-                    "~/Scripts/jquery.ui.sortable.js");
+                    "~/Scripts/lib/jquery.ui.core.js",
+                    "~/Scripts/lib/jquery.ui.widget.js",
+                    "~/Scripts/lib/jquery.ui.mouse.js",
+                    "~/Scripts/lib/jquery.ui.sortable.js")
+                .IncludeDirectory("~/Scripts/frontpage", "*.js");
 
             bundles.Add(jsBundle);
         }
