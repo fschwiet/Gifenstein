@@ -133,6 +133,7 @@
     <Content Include="Content\AllRightGentlemen_impressed.png" />
     <Content Include="Content\AllRightGentlemen_unimpressed.png" />
     <Content Include="Content\cursor_drag_arrow.png" />
+    <Content Include="Content\edit-icon.jpg" />
     <Content Include="Content\jasmine\jasmine.css" />
     <Content Include="Content\jasmine\jasmine_favicon.png" />
     <Content Include="Content\next.png" />
@@ -155,6 +156,7 @@
     <Content Include="Scripts\lib\jquery.ui.sortable.min.js" />
     <Content Include="Scripts\lib\jquery.ui.widget.js" />
     <Content Include="Scripts\lib\jquery.ui.widget.min.js" />
+    <Content Include="Scripts\frontpage\RowType.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

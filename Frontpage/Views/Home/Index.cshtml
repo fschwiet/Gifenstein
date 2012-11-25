@@ -12,52 +12,11 @@
 
         #sortable img.previous { left: 0;top: 20px; position: absolute}
         #sortable img.next { right: 0; top: 20px; position: absolute}
+        #sortable img.edit { right: 240px; top: 20px;position: absolute; cursor: move}
         #sortable img.drag { right: 180px; top: 20px;position: absolute; cursor: move}
         #sortable img.delete { right: 120px; top: 20px;position: absolute; cursor: move}
         img.add { padding-left: 234px}
     </style>
-    <script>
-        $(function() {
-            $("#sortable").sortable({
-                handle: "img.drag"
-            });
-            $( "#sortable" ).disableSelection();
-        });
-    
-        function ImageRow()
-        {
-        }
-
-        ImageRow.prototype.Render = function() {
-            var result = $("<li><img></li>");
-            result.find("img").attr("src", this.imageUrl);
-            return result;
-        };
-        
-        function AllRightAnnouncement() {
-            this.imageUrl = "/Content/AllRightGentlemen_dialog.png";
-        }
-
-        $.extend(AllRightAnnouncement.prototype, ImageRow.prototype);
-
-        function AllRightMinor() {
-            this.imageUrl = "/Content/AllRightGentlemen_unimpressed.png";
-        }
-
-        $.extend(AllRightMinor.prototype, ImageRow.prototype);
-
-        function AllRightMajor() {
-            this.imageUrl = "/Content/AllRightGentlemen_impressed.png";
-        }
-
-        $.extend(AllRightMajor.prototype, ImageRow.prototype);
-
-        var rowTypeManager = new RowTypeManager();
-
-        rowTypeManager.addRowType("AllRightAnnouncement");
-        rowTypeManager.addRowType("AllRightMinor");
-        rowTypeManager.addRowType("AllRightMajor");
-    </script>    
 }
 <h2>We're going to make a gif.</h2>
 
@@ -68,6 +27,12 @@
  
  
 <script type="text/javascript">
+
+    var rowTypeManager = new RowTypeManager();
+
+    rowTypeManager.addRowType("AllRightAnnouncement");
+    rowTypeManager.addRowType("AllRightMinor");
+    rowTypeManager.addRowType("AllRightMajor");
 
     var source = [
         {
@@ -88,6 +53,7 @@
         var nextButton = $("<img>").attr("src", "/Content/next.png").addClass("next");
         var dragGrip = $("<img>").attr("src", "/Content/cursor_drag_arrow.jpg").addClass("drag");
         var deleteButton = $("<img>").attr("src", "/Content/x_icon.png").addClass("delete");
+        var editButton = $("<img>").attr("src", "/Content/edit-icon.jpg").addClass("edit");
 
 
         var adjacentTypes = rowTypeManager.GetAdjacent(name);
@@ -97,6 +63,7 @@
         renderredRow.append(nextButton);
         renderredRow.append(dragGrip);
         renderredRow.append(deleteButton);
+        renderredRow.append(editButton);
 
         previousButton.click(function () {
             var newRenderred = GetRenderredRow(adjacentTypes[0]);
@@ -110,6 +77,10 @@
 
         deleteButton.click(function() {
             renderredRow.remove();
+        });
+
+        editButton.click(function() {
+            row.StartEdit();
         });
 
         return renderredRow;
@@ -128,4 +99,12 @@
     $("img.add-after").click(function () {
         $("#sortable").append(GetRenderredRow(rowTypeManager.GetLastType()));
     });
+    
+    $(function () {
+        $("#sortable").sortable({
+            handle: "img.drag"
+        });
+        $("#sortable").disableSelection();
+    });
+    
 </script>
