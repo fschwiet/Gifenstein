@@ -15,9 +15,20 @@ ImageRow.prototype.StartEdit = function()
 
 function AllRightAnnouncement() {
     this.imageUrl = "/Content/AllRightGentlemen_dialog.png";
+    this.announcement = "We're going to master the gif technology.";
 }
 
 $.extend(AllRightAnnouncement.prototype, ImageRow.prototype);
+
+AllRightAnnouncement.prototype.StartEdit = function() {
+    var templateSource = "<div>You have text {{announcement}}.</div>";
+    var template = Handlebars.compile(templateSource);
+
+    var content = $(template(this));
+    content.dialog({modal:true});
+    $("body").append();
+}
+
 
 function AllRightMinor() {
     this.imageUrl = "/Content/AllRightGentlemen_unimpressed.png";
