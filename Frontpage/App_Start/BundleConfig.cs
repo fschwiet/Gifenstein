@@ -18,6 +18,7 @@ namespace Frontpage.App_Start
                     "~/Scripts/lib/jquery.ui.mouse.js",
                     "~/Scripts/lib/jquery.ui.sortable.js",
                     "~/Scripts/handlebars.js")
+                .Include("~/Scripts/bootstrap.js")
                 .IncludeDirectory("~/Scripts/frontpage", "*.js");
 
 
@@ -28,7 +29,8 @@ namespace Frontpage.App_Start
             bundles.Add(frontpageTest);
 
             var southStreetTheme = new StyleBundle("~/Content/themes/south-street/all.css")
-                .IncludeDirectory("~/Content/themes/south-street/", "*.css");
+                .IncludeDirectory("~/Content/themes/south-street/", "*.css")
+                .Include("~/Content/bootstrap.css");
 
             bundles.Add(southStreetTheme);
         }

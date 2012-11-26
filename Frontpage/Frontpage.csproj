@@ -132,8 +132,14 @@
     <Content Include="Content\AllRightGentlemen_dialog.png" />
     <Content Include="Content\AllRightGentlemen_impressed.png" />
     <Content Include="Content\AllRightGentlemen_unimpressed.png" />
+    <Content Include="Content\bootstrap-responsive.css" />
+    <Content Include="Content\bootstrap-responsive.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cursor_drag_arrow.png" />
     <Content Include="Content\edit-icon.jpg" />
+    <Content Include="Content\images\glyphicons-halflings-white.png" />
+    <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\jasmine\jasmine.css" />
     <Content Include="Content\jasmine\jasmine_favicon.png" />
     <Content Include="Content\next.png" />
@@ -170,6 +176,8 @@
     <Content Include="Content\themes\south-street\jquery.ui.theme.css" />
     <Content Include="Content\x_icon.png" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\frontpage\RowTypeManager.test.js" />
     <Content Include="Scripts\handlebars.js" />
     <Content Include="Scripts\handlebars.runtime.js" />
