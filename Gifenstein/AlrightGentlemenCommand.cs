@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using Gifenstein.GifWidget;
 using Gifenstein.ImageResizerExtensions;
+using ImageResizer;
 using ManyConsole;
 
 namespace Gifenstein
@@ -14,6 +15,7 @@ namespace Gifenstein
     {
         public List<BaseWidget> Steps = new List<BaseWidget>();
         public Point ImageDimensions;
+        public int MaximumWidth = 500;
         private Dictionary<ConcurrentGifsCommand.Frame, AlrightStep> _frameToStep = new Dictionary<ConcurrentGifsCommand.Frame, AlrightStep>();
         private int? RemoveEveryNFrames;
 
@@ -25,8 +27,10 @@ namespace Gifenstein
             this.HasOption("m=", "Gif animation drawn within an unexcited frame", v =>
                 Steps.Add(new AlrightUnimpressedStep(v)));
 
-            this.HasOption("w=", "Gif animation drawn withn an excited frame", v =>
+            this.HasOption("w=", "Gif animation drawn with an excited frame", v =>
                 Steps.Add(new AlrightImpressedStep(v)));
+
+            this.HasOption<int>("maxw=", "Maximum width to draw the image at", v => MaximumWidth = v);
 
             this.HasOption<int>("r=", "Remove every <r> frames ", v => RemoveEveryNFrames = v);
         }
@@ -91,6 +95,11 @@ namespace Gifenstein
                                         currentFrame++;
                                     })).Plugins,
                 source: Output, target: Output);
+
+            ImageResizerUtil.ProcessImage(
+                new PluginList().WithAnimatedGifExtensions().Plugins, 
+                source:Output, target:Output, 
+                resizeSettings: new ResizeSettings(MaximumWidth, int.MaxValue, FitMode.Max, null));
 
             Console.WriteLine("Created filesize of {0} was {1}k.", Path.GetFullPath(Output), new FileInfo(Output).Length / 1000.0);
 
