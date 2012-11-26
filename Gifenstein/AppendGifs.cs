@@ -30,11 +30,13 @@ namespace Gifenstein
             {
                 foreach(var inputFile in Inputs)
                 {
-                    AnimationVisitorExtension.Visit(inputFile, (bitmap, graphic, delay) =>
-                    {
-                        outputWriter.FrameDelay = TimeSpan.FromMilliseconds(delay);
-                        outputWriter.AddFrame(bitmap);
-                    });
+                    ImageResizerUtil.ProcessImage(
+                        new PluginList().WithAnimatedGifExtensions().WithPlugin(new AnimationVisitorExtension((bitmap, graphic, delay) =>
+                            {
+                                outputWriter.FrameDelay = TimeSpan.FromMilliseconds(delay);
+                                outputWriter.AddFrame(bitmap);
+                            })).Plugins, 
+                            inputFile);
                 }
             }
 

@@ -78,6 +78,7 @@
     <Compile Include="ImageResizerExtensions\AnimationVisitorExtension.cs" />
     <Compile Include="ImageExtensions.cs" />
     <Compile Include="ImageInfo.cs" />
+    <Compile Include="ImageResizerExtensions\PluginList.cs" />
     <Compile Include="ImageResizerUtil.cs" />
     <Compile Include="NoOpTransformCommand.cs" />
     <Compile Include="Program.cs" />

@@ -31,11 +31,13 @@ namespace Gifenstein
 
             int position = 0;
 
-            AnimationVisitorExtension.Visit(Output, (bitmap, graphics, delay) =>
-            {
-                graphics.DrawImageUnscaled(frames[position].Image, 0, 0);
-                position++;
-            }, output:Output);
+            ImageResizerUtil.ProcessImage(
+                new PluginList().WithAnimatedGifExtensions().WithPlugin(new AnimationVisitorExtension((bitmap, graphics, delay) =>
+                    {
+                        graphics.DrawImageUnscaled(frames[position].Image, 0, 0);
+                        position++;
+                    })).Plugins, 
+                    source: Output, target: Output);
 
             return 0;
         }
@@ -60,17 +62,19 @@ namespace Gifenstein
             int currentTime = startTime;
             foreach (var input in inputs)
             {
-                AnimationVisitorExtension.Visit(input, (bitmap, graphic, duration) =>
-                {
-                    frames.Add(new Frame()
-                    {
-                        Start = currentTime,
-                        Duration = duration,
-                        Image = bitmap
-                    });
+                ImageResizerUtil.ProcessImage(
+                    new PluginList().WithAnimatedGifExtensions().WithPlugin(new AnimationVisitorExtension((bitmap, graphic, duration) =>
+                        {
+                            frames.Add(new Frame()
+                                {
+                                    Start = currentTime,
+                                    Duration = duration,
+                                    Image = bitmap
+                                });
 
-                    currentTime += duration;
-                });
+                            currentTime += duration;
+                        })).Plugins, 
+                        input);
             }
             return frames.ToArray();
         }

@@ -78,16 +78,19 @@ namespace Gifenstein
 
             var currentFrame = 0;
 
-            AnimationVisitorExtension.Visit(Output, (bitmap, graphics, delay) =>
-            {
-                var animationFrame = animationFrames[currentFrame];
-                foreach(var widget in Steps)
-                {
-                    widget.DrawFrame(animationFrame, graphics);
-                }
+            ImageResizerUtil.ProcessImage(
+                new PluginList().WithAnimatedGifExtensions()
+                                .WithPlugin(new AnimationVisitorExtension((bitmap, graphics, delay) =>
+                                    {
+                                        var animationFrame = animationFrames[currentFrame];
+                                        foreach (var widget in Steps)
+                                        {
+                                            widget.DrawFrame(animationFrame, graphics);
+                                        }
 
-                currentFrame++;
-            }, output:Output);
+                                        currentFrame++;
+                                    })).Plugins,
+                source: Output, target: Output);
 
             Console.WriteLine("Created filesize of {0} was {1}k.", Path.GetFullPath(Output), new FileInfo(Output).Length / 1000.0);
 

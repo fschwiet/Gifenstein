@@ -6,8 +6,6 @@ using System.IO;
 using System.Linq;
 using ImageResizer.Configuration;
 using ImageResizer.Plugins;
-using ImageResizer.Plugins.AnimatedGifs;
-using ImageResizer.Plugins.PrettyGifs;
 using ImageResizer.Resizing;
 
 namespace Gifenstein.ImageResizerExtensions
@@ -61,16 +59,6 @@ namespace Gifenstein.ImageResizerExtensions
             }
 
             return results.ToArray();
-        }
-
-        public static void Visit(object input, Action<Bitmap, Graphics, int> visitor, object output = null)
-        {
-            ImageResizerUtil.ProcessImage(new IPlugin[]
-            {
-                new PrettyGifs(),
-                new AnimatedGifs(),
-                new AnimationVisitorExtension(visitor)
-            }, input, output ?? new MemoryStream());
         }
     }
 }
