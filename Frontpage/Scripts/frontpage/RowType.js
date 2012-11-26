@@ -20,12 +20,24 @@ function AllRightAnnouncement() {
 
 $.extend(AllRightAnnouncement.prototype, ImageRow.prototype);
 
-AllRightAnnouncement.prototype.StartEdit = function() {
-    var templateSource = "<div>You have text {{announcement}}.</div>";
+AllRightAnnouncement.prototype.StartEdit = function () {
+    
+    var templateSource = "<fieldset><label>What text should be written for this frame?</label> <input class=\"input-block-level\" type=\"text\" placeholder=\"Type something..\" value=\"{{announcement}}\"/><button>Submit</button></fieldset>";
     var template = Handlebars.compile(templateSource);
 
     var content = $(template(this));
-    content.dialog({modal:true});
+    content.dialog({
+        modal: true,
+        width: 480,
+    });
+
+    var that = this;
+    content.find("button").click(function() {
+        that.announcement = $("input[type=text]").val();
+        content.dialog("close");
+        content.remove();
+    });
+    
     $("body").append();
 }
 
