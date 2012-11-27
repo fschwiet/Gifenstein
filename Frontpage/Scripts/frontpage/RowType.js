@@ -8,10 +8,8 @@ ImageRow.prototype.Render = function () {
     return result;
 };
 
-ImageRow.prototype.StartEdit = function()
-{
-    alert("clicked edit");
-}
+ImageRow.prototype.StartEdit = function() {
+};
 
 function AllRightAnnouncement() {
     this.imageUrl = "/Content/AllRightGentlemen_dialog.png";
@@ -41,15 +39,42 @@ AllRightAnnouncement.prototype.StartEdit = function () {
     $("body").append();
 }
 
+function AllRightAnimationFrame() {
+}
+
+$.extend(AllRightAnimationFrame.prototype, ImageRow.prototype);
+
+AllRightAnimationFrame.prototype.StartEdit = function () {
+    
+    var templateSource = "<fieldset><label>Please pick an url for an animated gif for this frame.</label> <input class=\"input-block-level\" type=\"text\" placeholder=\"Url here..\" value=\"{{customUrl}}\"/><button>Submit</button></fieldset>";
+    var template = Handlebars.compile(templateSource);
+
+    var content = $(template(this));
+    content.dialog({
+        modal: true,
+        width: 480,
+    });
+
+    var that = this;
+    content.find("button").click(function () {
+        that.customUrl = $("input[type=text]").val();
+        content.dialog("close");
+        content.remove();
+    });
+
+    $("body").append();
+}
 
 function AllRightMinor() {
     this.imageUrl = "/Content/AllRightGentlemen_unimpressed.png";
+    this.customUrl = "http://i2.kym-cdn.com/photos/images/masonry/000/306/930/d20.gif";
 }
 
-$.extend(AllRightMinor.prototype, ImageRow.prototype);
+$.extend(AllRightMinor.prototype, AllRightAnimationFrame.prototype);
 
 function AllRightMajor() {
     this.imageUrl = "/Content/AllRightGentlemen_impressed.png";
+    this.customUrl = "http://i1.kym-cdn.com/photos/images/masonry/000/422/365/4ef.gif";
 }
 
-$.extend(AllRightMajor.prototype, ImageRow.prototype);
+$.extend(AllRightMajor.prototype, AllRightAnimationFrame.prototype);
