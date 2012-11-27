@@ -13,8 +13,6 @@ describe("RowTypeManager", function() {
     });
 
     it("Can be used to navigate between the types", function () {
-
-
         expect(rowTypeManager.GetAdjacent("b")).toEqual(["a", "c"]);
         expect(rowTypeManager.GetAdjacent("a")).toEqual(["d", "b"]);
         expect(rowTypeManager.GetAdjacent("d")).toEqual(["c", "a"]);

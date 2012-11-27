@@ -65,6 +65,8 @@
         var adjacentTypes = rowTypeManager.GetAdjacent(name);
 
         var renderredRow = row.Render();
+        renderredRow.data("rowObject", row);
+        renderredRow.addClass("hasRowObject");
         renderredRow.append(previousButton);
         renderredRow.append(nextButton);
         renderredRow.append(dragGrip);
@@ -112,5 +114,13 @@
         });
         $("#sortable").disableSelection();
     });
+    
+    function GetDTO() {
+        var dto = $("#sortable .hasRowObject").map(function(index, domElement) {
+            return $(domElement).data("rowObject").ToDTO();
+        });
+
+        return dto;
+    }
 
 </script>

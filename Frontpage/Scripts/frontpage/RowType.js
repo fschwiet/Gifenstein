@@ -1,4 +1,9 @@
 ﻿
+function poorMansInheritance(type, baseType) {
+    $.extend(type.prototype, baseType.prototype);
+    type.prototype.parentPrototype = baseType.prototype;
+};
+
 function ImageRow() {
 }
 
@@ -16,10 +21,10 @@ function AllRightAnnouncement() {
     this.announcement = "We're going to master the gif technology.";
 }
 
-$.extend(AllRightAnnouncement.prototype, ImageRow.prototype);
+poorMansInheritance(AllRightAnnouncement, ImageRow);
 
-AllRightAnnouncement.prototype.StartEdit = function () {
-    
+AllRightAnnouncement.prototype.StartEdit = function() {
+
     var templateSource = "<fieldset><label>What text should be written for this frame?</label> <input class=\"input-block-level\" type=\"text\" placeholder=\"Type something..\" value=\"{{announcement}}\"/><button>Submit</button></fieldset>";
     var template = Handlebars.compile(templateSource);
 
@@ -35,17 +40,24 @@ AllRightAnnouncement.prototype.StartEdit = function () {
         content.dialog("close");
         content.remove();
     });
-    
+
     $("body").append();
-}
+};
+
+AllRightAnnouncement.prototype.ToDTO = function() {
+    return {
+        type: "AllRightAnnouncement",
+        announcement: this.announcement
+    };
+};
 
 function AllRightAnimationFrame() {
 }
 
-$.extend(AllRightAnimationFrame.prototype, ImageRow.prototype);
+poorMansInheritance(AllRightAnimationFrame, ImageRow);
 
-AllRightAnimationFrame.prototype.StartEdit = function () {
-    
+AllRightAnimationFrame.prototype.StartEdit = function() {
+
     var templateSource = "<fieldset><label>Please pick an url for an animated gif for this frame.</label> <input class=\"input-block-level\" type=\"text\" placeholder=\"Url here..\" value=\"{{customUrl}}\"/><button>Submit</button></fieldset>";
     var template = Handlebars.compile(templateSource);
 
@@ -56,25 +68,45 @@ AllRightAnimationFrame.prototype.StartEdit = function () {
     });
 
     var that = this;
-    content.find("button").click(function () {
+    content.find("button").click(function() {
         that.customUrl = $("input[type=text]").val();
         content.dialog("close");
         content.remove();
     });
 
     $("body").append();
-}
+};
+
+AllRightAnimationFrame.prototype.ToDTO = function () {
+    return {
+        type: "AllRightAnimationFrame",
+        customUrl: this.customUrl
+    };
+};
 
 function AllRightMinor() {
     this.imageUrl = "/Content/AllRightGentlemen_unimpressed.png";
     this.customUrl = "http://i2.kym-cdn.com/photos/images/masonry/000/306/930/d20.gif";
 }
 
-$.extend(AllRightMinor.prototype, AllRightAnimationFrame.prototype);
+poorMansInheritance(AllRightMinor, AllRightAnimationFrame);
+
+AllRightMinor.prototype.ToDTO = function () {
+    var result = this.parentPrototype.ToDTO.call(this);
+    result.type = "AllRightMinor";
+    return result;
+};
 
 function AllRightMajor() {
     this.imageUrl = "/Content/AllRightGentlemen_impressed.png";
     this.customUrl = "http://i1.kym-cdn.com/photos/images/masonry/000/422/365/4ef.gif";
 }
 
-$.extend(AllRightMajor.prototype, AllRightAnimationFrame.prototype);
+poorMansInheritance(AllRightMajor, AllRightAnimationFrame);
+
+AllRightMajor.prototype.ToDTO = function () {
+    var result = this.parentPrototype.ToDTO.call(this);
+    result.type = "AllRightMajor";
+    return result;
+};
+

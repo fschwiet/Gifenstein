@@ -178,6 +178,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\frontpage\RowType.test.js" />
     <Content Include="Scripts\frontpage\RowTypeManager.test.js" />
     <Content Include="Scripts\handlebars.js" />
     <Content Include="Scripts\handlebars.runtime.js" />
