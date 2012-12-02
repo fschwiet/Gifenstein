@@ -117,11 +117,13 @@
     <Compile Include="BundleUtil\NontestBundle.cs" />
     <Compile Include="BundleUtil\TestBundle.cs" />
     <Compile Include="BundleUtil\WrappingBundle.cs" />
+    <Compile Include="Controllers\BuildController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JasmineController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="SingleAssemblyJsonTypeBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Net.Http.Formatting;
+using System.Runtime.Serialization.Formatters;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Frontpage.App_Start;
+using Newtonsoft.Json;
 
 namespace Frontpage
 {
@@ -22,6 +22,18 @@ namespace Frontpage
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings =
+                GetJsonSerializationSettings();
         }
+
+        public static JsonSerializerSettings GetJsonSerializationSettings()
+        {
+            var settings = new JsonSerializerSettings();
+            settings.Binder = new SingleAssemblyJsonTypeBinder(typeof(MvcApplication).Assembly);
+            settings.TypeNameHandling = TypeNameHandling.Objects;
+            return settings;
+        }
+
     }
 }

@@ -16,18 +16,22 @@
         #sortable img.drag { right: 180px; top: 20px;position: absolute; cursor: move}
         #sortable img.delete { right: 120px; top: 20px;position: absolute; cursor: move}
         img.add { padding-left: 234px}
+
     </style>
 }
 
       <div class="container">
         <div class="page-header">
-          <h1>We're going to make a gif.</h1>
+            <h1>We're going to make a gif.  Click &gt;<button class="build-button btn"><h2>BUILD</h2></button>&lt;
+              when you're ready.
+                
+                </h1>
         </div>
 
         <img class="add add-before" src="/Content/add-icon.png"/>
         <ul id="sortable">
         </ul>
-        <img class="add add-after" src="/Content/add-icon.png"/>
+          <img class="add add-after" src="/Content/add-icon.png"/>
       </div>
 
  
@@ -107,7 +111,19 @@
     $("img.add-after").click(function () {
         $("#sortable").append(GetRenderredRow(rowTypeManager.GetLastType()));
     });
-    
+
+    $(".build-button").click(function() {
+        var dto = GetDTO();
+
+        $.ajax({
+            url: "/Build",
+            type: "POST",
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify({ elements: dto })
+        });
+    });
+
     $(function () {
         $("#sortable").sortable({
             handle: "img.drag"
@@ -120,7 +136,7 @@
             return $(domElement).data("rowObject").ToDTO();
         });
 
-        return dto;
+        return $.makeArray(dto);
     }
 
 </script>

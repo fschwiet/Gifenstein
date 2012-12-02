@@ -46,7 +46,7 @@ AllRightAnnouncement.prototype.StartEdit = function() {
 
 AllRightAnnouncement.prototype.ToDTO = function() {
     return {
-        type: "AllRightAnnouncement",
+        $type: "AllRightAnnouncement",
         announcement: this.announcement
     };
 };
@@ -79,7 +79,7 @@ AllRightAnimationFrame.prototype.StartEdit = function() {
 
 AllRightAnimationFrame.prototype.ToDTO = function () {
     return {
-        type: "AllRightAnimationFrame",
+        $type: "AllRightAnimationFrame",
         customUrl: this.customUrl
     };
 };
@@ -93,7 +93,7 @@ poorMansInheritance(AllRightMinor, AllRightAnimationFrame);
 
 AllRightMinor.prototype.ToDTO = function () {
     var result = this.parentPrototype.ToDTO.call(this);
-    result.type = "AllRightMinor";
+    result.$type = "AllRightMinor";
     return result;
 };
 
@@ -106,7 +106,7 @@ poorMansInheritance(AllRightMajor, AllRightAnimationFrame);
 
 AllRightMajor.prototype.ToDTO = function () {
     var result = this.parentPrototype.ToDTO.call(this);
-    result.type = "AllRightMajor";
+    result.$type = "AllRightMajor";
     return result;
 };
 
